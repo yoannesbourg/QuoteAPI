@@ -11,4 +11,12 @@ app.use(express.static('public'));
 
 app.listen(PORT, () => {
     console.log(`Server is listening on ${PORT}`);
-  });
+});
+
+
+//Get random quote
+app.get('/api/quotes/random', (req, res) => {
+    const randomquote = getRandomElement(quotes)
+    res.send(randomquote)
+})
+
