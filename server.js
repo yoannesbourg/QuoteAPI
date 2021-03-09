@@ -16,7 +16,18 @@ app.listen(PORT, () => {
 
 //Get random quote
 app.get('/api/quotes/random', (req, res) => {
-    const randomquote = getRandomElement(quotes)
-    res.send(randomquote)
+    const randomQuote = getRandomElement(quotes)
+    res.send({ quote: randomQuote })
 })
 
+//Filter quotes by author or get all
+app.get('/api/quotes', (req, res) => {
+    const filterQuotes = quotes.filter(author => {
+        return author.person === req.query.person
+    })
+    if(req.query.person) {
+        res.send({ quotes: filterQuotes })
+    } else {
+        res.send({ quotes: quotes })
+    } 
+})
